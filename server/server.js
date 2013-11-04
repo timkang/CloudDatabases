@@ -6,25 +6,33 @@ mysql = require("mysql");
 var connection = mysql.createConnection({ 
    user: "root", 
    password: "", 
-   database: "db_name"
+   database: "mySQLTest"
 }); 
 
 http.createServer(function(request, response) {
-   response.writeHead(200, {"Content-Type": "text/plain"});
-   var _get = url.parse(request.url, true).query;
-   response.write("Hello World\n");
-   response.write('Here is your data: ' + _get['data'] + '\n');
-   
-   connection.query('SELECT * FROM your_table;', function (error, rows, fields) { 
-   		response.writeHead(200, {'Content-Type': 'x-application/json'});         
-		response.end(JSON.stringify(rows)); 
-	}); 
+    response.writeHead(200, {"Content-Type": "text/plain"});
+
+    var parts = url.parse(request.url, true).pathname;
+
+
+    request.on('end', function () {
+        response.writeHead(200, {'Content-Type': 'x-application/json'}); 
+
+        connection.query('SELECT * FROM foo;', function (error, rows, fields) { 
+            response.write("Hello World\n");
+
+            response.write(JSON.stringify(rows));
+            response.end();      
+    	});
+    });
+
+    // response.write('Here is your data: ' + parts + '\n');
 
     fs.readFile('test.txt', 'utf-8', function (error, data) {
         response.writeHead(200, {'Content-Type': 'text/plain'});
-        data = parseInt(data) + 1;
+        data = 1;
         fs.writeFile('test.txt', data);
-        response.end();
     });
-   response.end();
+   // response.end();
 }).listen(8888);
+
