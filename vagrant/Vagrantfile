@@ -1,7 +1,9 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-   config.vm.define :mongodb_client do |mongodb_client|
+  config.vm.define :mongodb_client do |mongodb_client|
+    mongodb_client.vbguest.auto_update = true
+    mongodb_client.vbguest.no_remote = true
     mongodb_client.vm.box = "ubuntuBox"
     mongodb_client.vm.network :private_network, ip: "192.168.33.10"
 

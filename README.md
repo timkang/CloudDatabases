@@ -53,3 +53,5 @@ Daniel Bartholomew. 2010. SQL vs. NoSQL. Linux J. 2010, 195, pages. <http://dl.a
 Monash, Curt. "The Database Technology of Guild Wars." A Monash Research Publication. N.p., 9 June 2007. Web. <http://www.dbms2.com/2007/06/09/the-database-technology-of-guild-wars/>.
 Valar, CCP. "MAKING OUR BACKSIDE BIGGER." EVE Community. N.p., 2009 Oct. 6. Web. <http://community.eveonline.com/news/dev-blogs/making-our-backside-bigger/>
 
+6. Plugins needed
+   Install plugin with "vagrant plugin install vagrant-vbguest"
