@@ -45,7 +45,6 @@ dbpath=/var/lib/mongodb
 
 port = 27017
 shardsvr = true
-chunkSize = 2
 
 # Enable journaling, http://www.mongodb.org/display/DOCS/Journaling
 journal=true"

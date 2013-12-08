@@ -4,7 +4,7 @@ exec { "apt-update":
 }
 
 exec { "copy_ycsb":    
-  command => "/bin/cp -r /vagrant/YCSB /home/vagrant/",
+  command => "/bin/cp -r /vagrant/files/YCSB /home/vagrant/",
   timeout => 0
 }
 
@@ -66,7 +66,6 @@ dbpath=/var/lib/mongodb
 
 port = 27017
 configsvr = true
-chunkSize = 2
 
 # Enable journaling, http://www.mongodb.org/display/DOCS/Journaling
 journal=true"
