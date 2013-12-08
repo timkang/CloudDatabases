@@ -1,35 +1,52 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vbguest.auto_update = true
+  config.vbguest.no_remote = true
   config.vm.define :mongodb_client do |mongodb_client|
-    mongodb_client.vbguest.auto_update = true
-    mongodb_client.vbguest.no_remote = true
     mongodb_client.vm.box = "ubuntuBox"
     mongodb_client.vm.network :private_network, ip: "192.168.33.10"
 
     mongodb_client.vm.provider :virtualbox do |vb|
       vb.gui = false
-      vb.customize ["modifyvm", :id, "--memory", "512"]
+      vb.customize ["modifyvm", :id, "--memory", "256"]
     end
 
     mongodb_client.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
       puppet.manifest_file  = "init_client.pp"
+      puppet.options = "--verbose --debug"
     end
   end
 
-  config.vm.define :mongodb_01 do |mongodb_01|
-    mongodb_01.vm.box = "ubuntuBox"
-    mongodb_01.vm.network :private_network, ip: "192.168.33.11"
+  config.vm.define :mongodb_shard_01 do |mongodb_shard_01|
+    mongodb_shard_01.vm.box = "ubuntuBox"
+    mongodb_shard_01.vm.network :private_network, ip: "192.168.33.11"
 
-    mongodb_01.vm.provider :virtualbox do |vb|
+    mongodb_shard_01.vm.provider :virtualbox do |vb|
       vb.gui = false
-      vb.customize ["modifyvm", :id, "--memory", "512"]
+      vb.customize ["modifyvm", :id, "--memory", "256"]
     end
 
-    mongodb_01.vm.provision :puppet do |puppet|
+    mongodb_shard_01.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.manifest_file  = "init_mongodb.pp"
+      puppet.manifest_file  = "init_mongodb_shard_01.pp"
+      puppet.options = "--verbose --debug"
     end
   end
+  config.vm.define :mongodb_shard_02 do |mongodb_config_server|
+    mongodb_shard_02.vm.box = "ubuntuBox"
+    mongodb_shard_02.vm.network :private_network, ip: "192.168.33.12"
+
+    mongodb_shard_02.vm.provider :virtualbox do |vb|
+      vb.gui = false
+      vb.customize ["modifyvm", :id, "--memory", "256"]
+    end
+
+    mongodb_shard_02.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "init_mongodb_shard_02.pp"
+    end
+  end
+
 end
