@@ -33,7 +33,7 @@ package {
 
 file {
    "/home/vagrant/start_mongos.sh":
-      content => "sudo mongos --configdb cfg_server:27017 --port 27018",
+      content => "sudo mongos --configdb cfg_server:27017 --port 27018 --chunkSize 1",
       mode => 0777
 }
 

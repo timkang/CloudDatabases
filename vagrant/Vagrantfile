@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     mongodb_client.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.manifest_file  = "init_client.pp"
+      puppet.manifest_file  = "init_client_mongodb.pp"
       puppet.options = "--verbose --debug"
     end
   end
@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.options = "--verbose --debug"
     end
   end
-  config.vm.define :mongodb_shard_02 do |mongodb_config_server|
+  config.vm.define :mongodb_shard_02 do |mongodb_shard_02|
     mongodb_shard_02.vm.box = "ubuntuBox"
     mongodb_shard_02.vm.network :private_network, ip: "192.168.33.12"
 
@@ -49,4 +49,35 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define :mysql_client do |mysql_client|
+    mysql_client.vm.box = "ubuntuBox"
+    mysql_client.vm.network :private_network, ip: "192.168.33.14"
+
+    mysql_client.vm.provider :virtualbox do |vb|
+      vb.gui = false
+      vb.customize ["modifyvm", :id, "--memory", "256"]
+    end
+
+    mysql_client.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "init_client_mysql.pp"
+      puppet.options = "--verbose --debug"
+    end
+  end
+
+  config.vm.define :mysql_cluster_01 do |mysql_cluster_01|
+    mysql_cluster_01.vm.box = "ubuntuBox"
+    mysql_cluster_01.vm.network :private_network, ip: "192.168.33.13"
+
+    mysql_cluster_01.vm.provider :virtualbox do |vb|
+      vb.gui = false
+      vb.customize ["modifyvm", :id, "--memory", "256"]
+    end
+
+    mysql_cluster_01.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "init_mysql_cluster_01.pp"
+      puppet.options = "--verbose --debug"
+    end
+  end
 end

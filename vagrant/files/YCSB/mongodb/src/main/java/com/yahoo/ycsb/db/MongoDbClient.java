@@ -73,7 +73,7 @@ public class MongoDbClient extends DB {
             // initialize MongoDb driver
             Properties props = getProperties();
             String url = props.getProperty("mongodb.url",
-                    "mongodb://localhost:27017");
+                    "mongodb://cfg_server:27018");
             database = props.getProperty("mongodb.database", "ycsb");
             String writeConcernType = props.getProperty("mongodb.writeConcern",
                     "safe").toLowerCase();

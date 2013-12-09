@@ -187,6 +187,10 @@ public class JdbcDBClient extends DB implements JdbcDBClientConstants {
           }
       }
 
+      System.out.println("urls: "+urls);
+      System.out.println("user: "+user);
+      System.out.println("passwd: "+passwd);
+      System.out.println("driver: "+driver);
       String autoCommitStr = props.getProperty(JDBC_AUTO_COMMIT, Boolean.TRUE.toString());
       Boolean autoCommit = Boolean.parseBoolean(autoCommitStr);
 

@@ -35,3 +35,7 @@ insertproportion=0
 
 requestdistribution=zipfian
 
+db.driver=com.mysql.jdbc.Driver
+db.url=jdbc:mysql://mysql_01:3306/ycsb
+db.user=mysql
+db.passwd=

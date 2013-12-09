@@ -1,0 +1,4 @@
+db.driver=mysql-connector-java
+db.url=jdbc:mysql://mysql_01:3306
+db.user=root
+db.passwd=""
