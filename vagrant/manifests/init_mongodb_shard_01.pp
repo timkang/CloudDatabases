@@ -1,4 +1,4 @@
-exec { "apt-update":    
+exec { "apt-update":
    command => "/usr/bin/apt-get update",
    timeout => 0
 }
@@ -33,7 +33,7 @@ file {
 
 file {
   "/etc/mongodb.conf":
-    content => 
+    content =>
 "# mongodb.conf
 
 # Where to store the data.

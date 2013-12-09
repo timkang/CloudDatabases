@@ -14,25 +14,26 @@
 # LICENSE file.
 
 # Yahoo! Cloud System Benchmark
-# Workload C: Read only
-#   Application example: user profile cache, where profiles are constructed elsewhere (e.g., Hadoop)
+# Workload MySQL Test 01
 #
-#   Read/update ratio: 100/0
+#   Read/update ratio: 80/50
 #   Default data size: 1 KB records (10 fields, 100 bytes each, plus key)
 #   Request distribution: zipfian
 
-recordcount=1000
-operationcount=1000
+recordcount=100000
+operationcount=2000000
 workload=com.yahoo.ycsb.workloads.CoreWorkload
 
 readallfields=true
 
-readproportion=1
-updateproportion=0
+readproportion=0.20
+updateproportion=0.80
 scanproportion=0
 insertproportion=0
 
 requestdistribution=zipfian
 
-
-
+db.driver=com.mysql.jdbc.Driver
+db.url=jdbc:mysql://mysql_01:3306/ycsb
+db.user=mysql
+db.passwd=

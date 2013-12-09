@@ -1,9 +1,9 @@
-exec { "apt-update":    
+exec { "apt-update":
   command => "/usr/bin/apt-get update",
   timeout => 0
 }
 
-exec { "copy_ycsb":    
+exec { "copy_ycsb":
   command => "/bin/cp -r /vagrant/files/YCSB /home/vagrant/",
   timeout => 0
 }
@@ -54,7 +54,7 @@ file {
 
 file {
   "/etc/mongodb.conf":
-   content => 
+   content =>
 "# mongodb.conf
 
 # Where to store the data.
