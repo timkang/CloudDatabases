@@ -37,5 +37,6 @@ file {
 "127.0.0.1 localhost
 127.0.0.1 precise64
 192.168.33.14 mysql_client
-192.168.33.13 mysql_01"
+192.168.33.13 mysql_01
+192.168.33.15 mysql_02"
 }

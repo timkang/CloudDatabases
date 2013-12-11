@@ -1,0 +1,8 @@
+sh.addShard("shard_01:27017")
+sh.addShard("shard_02:27017")
+sh.enableSharding("ycsb")
+sh.shardCollection("ycsb.usertable", {"_id": "hashed"})
+db.usertable.getShardCollection()
+db.adminCommand( {removeShard: "shard_name"} )
+db.dropDatabase
+db.collection.getShardDistribution()
